@@ -48,18 +48,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 			
 	
 
-	// @Bean
-	// @Override
-	// public UserDetailsService userDetailsService() {
-	// 	UserDetails user =
-	// 		 User.withDefaultPasswordEncoder()
-	// 			.username("user")
-	// 			.password("password")
-	// 			.roles("USER")
-	// 			.build();
-	// 			System.out.println("websecurityconfig : userpassword : "+user.getPassword());
-	// 	return new InMemoryUserDetailsManager(user);
-	// }
+	@Bean
+	@Override
+	public UserDetailsService userDetailsService() {
+		UserDetails user =
+			 User.withDefaultPasswordEncoder()
+				.username("user")
+				.password("password")
+				.roles("USER")
+				.build();
+				System.out.println("websecurityconfig : userpassword : "+user.getPassword());
+		return new InMemoryUserDetailsManager(user);
+	}
 
 // @Autowired 
 // public void configAuthentication(AuthenticationManagerBuilder auth, DataSource dataSource) throws Exception { //모든 인증 Manager

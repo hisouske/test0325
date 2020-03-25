@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
@@ -20,10 +18,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 
 	private UserService userservice;
 
-	@Bean // 비밀번호 암호화 객체
-	public PasswordEncoder passwordEnoder(){
-		return new BCryptPasswordEncoder();
-	}
+	// @Bean // 비밀번호 암호화 객체
+	// public PasswordEncoder passwordEnoder(){
+	// 	return new BCryptPasswordEncoder();
+	// }
 
 	@Override
 	protected void configure(HttpSecurity http)/** HTTP 요청에 대한 웹 기반 보안 구성 */ throws Exception {
@@ -48,18 +46,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 			
 	
 
-	// @Bean
-	// @Override
-	// public UserDetailsService userDetailsService() {
-	// 	UserDetails user =
-	// 		 User.withDefaultPasswordEncoder()
-	// 			.username("user")
-	// 			.password("password")
-	// 			.roles("USER")
-	// 			.build();
-	// 			System.out.println("websecurityconfig : userpassword : "+user.getPassword());
-	// 	return new InMemoryUserDetailsManager(user);
-	// }
+	@Bean
+	@Override
+	public UserDetailsService userDetailsService() {
+		UserDetails user =
+			 User.withDefaultPasswordEncoder()
+				.username("user")
+				.password("password")
+				.roles("USER")
+				.build();
+				System.out.println("websecurityconfig : userpassword : "+user.getPassword());
+		return new InMemoryUserDetailsManager(user);
+	}
 
 // @Autowired 
 // public void configAuthentication(AuthenticationManagerBuilder auth, DataSource dataSource) throws Exception { //모든 인증 Manager
