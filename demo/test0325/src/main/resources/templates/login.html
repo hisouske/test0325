@@ -13,6 +13,7 @@
         </div>
         <!--<form th:action="@{/login}" method="post">-->
             <form th:action="@{/login}" method="post">
+            <!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
             <h1 class="h3 mb-3 font-weight-normal">[[${login_message}]]</h1>
             <div><label> User Name : <input type="text" name="username"/> </label></div>
             <div><label> Password: <input type="password" name="password"/> </label></div>
