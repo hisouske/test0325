@@ -43,8 +43,6 @@ public class UserService implements UserDetailsService {
 
 	public void setCurrentUser(User user) {
 		System.out.println(user);
-		System.out.println(user);
-
         ((MyAuthentication) SecurityContextHolder.getContext().getAuthentication()).setUser(user);
     }
 

@@ -42,7 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 		http.authorizeRequests() //페이지 접근 권한 설정.사용자 인증이 된 요청에 대해서만 요청을 허용한다.
 				.antMatchers("/", "/home","/join","/login/*")
 				.permitAll() // home 경로 권한없이 접근 가능
-				.antMatchers("/admin").hasAuthority("ROLE_ADMIN")
 				.anyRequest()
 				.authenticated(); //인증된 사용자만 접근 가능 하도록 설정
 

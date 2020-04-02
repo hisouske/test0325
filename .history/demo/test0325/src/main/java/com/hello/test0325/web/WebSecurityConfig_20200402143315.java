@@ -40,12 +40,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 	@Override
 	public void configure(HttpSecurity http) throws Exception {/** HTTP 요청에 대한 웹 기반 보안 구성 */
 		http.authorizeRequests() //페이지 접근 권한 설정.사용자 인증이 된 요청에 대해서만 요청을 허용한다.
-				.antMatchers("/", "/home","/join","/login/*")
-				.permitAll() // home 경로 권한없이 접근 가능
-				.antMatchers("/admin").hasAuthority("ROLE_ADMIN")
+				.antMatchers("/", "/home","/join","/login/*").permitAll() // home 경로 권한없이 접근 가능
 				.anyRequest()
 				.authenticated(); //인증된 사용자만 접근 가능 하도록 설정
 
+				http.authorizeRequests() //페이지 접근 권한 설정.사용자 인증이 된 요청에 대해서만 요청을 허용한다.
+				.antMatchers("/admin").permitAll() // home 경로 권한없이 접근 가능
+				.anyRequest()
+				.authenticated(); //인증된 사용자만 접근 가능 하도록 설정
 			
 			//	http.csrf().disable();
 			http.formLogin() //로그인 설정, httpSession 기본적 이용. 사용자는 폼기반 로그인으로 인증 할 수 있습니다.
