@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 				.antMatchers("/", "/home","/join","/login/*").permitAll() // home 경로 권한없이 접근 가능
 				.anyRequest().authenticated(); //인증된 사용자만 접근 가능 하도록 설정
 			
-			//	http.csrf().disable();
+				http.csrf().disable();
 			http.formLogin() //로그인 설정, httpSession 기본적 이용. 사용자는 폼기반 로그인으로 인증 할 수 있습니다.
 				.loginPage("/login") //커스텀 로그인 폼, action 경로랑 일치 해야함
 				.failureUrl("/login?error") //로그인 실패시 이동 하는 페이지 설정
