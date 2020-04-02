@@ -32,7 +32,10 @@ public class AuthProvider implements AuthenticationProvider{
     @Autowired
     UserService userService;
 
-    
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+
     
 
     // @Bean // 비밀번호 암호화 객체
@@ -55,7 +58,7 @@ public class AuthProvider implements AuthenticationProvider{
        
        
      //   UsernamePasswordAuthenticationToken a =null;
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+   
        User user = userService.getUsername(username);
         // user가 없거나 비밀번호가 맞지 않는 경우.
         if (user!=null&& webpassword!=null) {
@@ -71,14 +74,12 @@ public class AuthProvider implements AuthenticationProvider{
     }
 
     List<GrantedAuthority> grantedAuthorityList = new ArrayList<GrantedAuthority>();
-    grantedAuthorityList.add(new SimpleGrantedAuthority(user.getAuthority()));
+    grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
    // userService.setCurrentUser(user);
-        System.out.println(userService.getCurrentUser());
-      
-  // return new MyAuthentication(username,webpassword,grantedAuthorityList,user);
-  System.out.println(new UsernamePasswordAuthenticationToken(username, webpassword,grantedAuthorityList));
-  return new UsernamePasswordAuthenticationToken(username, webpassword,grantedAuthorityList);
-}
+            System.out.println(userService.getCurrentUser());
+          System.out.println(authentication);
+   return new MyAuthentication(username,webpassword,grantedAuthorityList,user);
+    }
 
 @Override
 public boolean supports(Class<?> authentication) {

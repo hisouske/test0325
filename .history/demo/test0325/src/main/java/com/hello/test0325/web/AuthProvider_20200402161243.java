@@ -71,10 +71,10 @@ public class AuthProvider implements AuthenticationProvider{
     }
 
     List<GrantedAuthority> grantedAuthorityList = new ArrayList<GrantedAuthority>();
-    grantedAuthorityList.add(new SimpleGrantedAuthority(user.getAuthority()));
+    grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
    // userService.setCurrentUser(user);
         System.out.println(userService.getCurrentUser());
-      
+        System.out.println(authentication);
   // return new MyAuthentication(username,webpassword,grantedAuthorityList,user);
   System.out.println(new UsernamePasswordAuthenticationToken(username, webpassword,grantedAuthorityList));
   return new UsernamePasswordAuthenticationToken(username, webpassword,grantedAuthorityList);

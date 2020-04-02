@@ -22,7 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 	
 	
 	
-
+	// @Autowired
+	// AuthProvider authProvider;
 	
 	// @Bean // userservice 객체 동작은 하나 return null
 	// public UserService userservice(){
@@ -44,35 +45,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 			//	http.csrf().disable();
 			http.formLogin() //로그인 설정, httpSession 기본적 이용. 사용자는 폼기반 로그인으로 인증 할 수 있습니다.
 				.loginPage("/login") //커스텀 로그인 폼, action 경로랑 일치 해야함
+			
+
 				.failureUrl("/login?error") //로그인 실패시 이동 하는 페이지 설정
-				.defaultSuccessUrl("/hello",true) // 로그인 성공시 이동 하는 페이지 설정
-				
+				//.defaultSuccessUrl("/hello",true) // 로그인 성공시 이동 하는 페이지 설정
+				.successHandler(new MyAuthenticationSuccess()) 
 				.permitAll(); //로그인 페이지 모든 권한 설정
 				
 			http.logout() //로그아웃 설정
 				.permitAll() //update 예정
 				//로그인 프로세스가 진행될 provider
-				.and()
+				.and();
 				//.httpBasic()//사용자는 HTTP기반 인증으로 인증 할 수 있습니다.
-				.authenticationProvider(authProvider);
+				//.authenticationProvider(authProvider);
 				
 
 			// System.out.println("++++++//////"+http.formLogin());
 			//  System.out.println("configure messege : "+authProvider);
 			// System.out.println(http);
 		}
-		// @Autowired
-		// private UserService userservice;
-	
 		@Autowired
-		AuthProvider authProvider;
-		// @Autowired //생성자나 세터 등을 사용하여 의존성 주입을 하려고 할 때, 해당 빈을 찾아서 주입해주는 annotation
-		// public void configure(AuthenticationManagerBuilder auth) throws Exception { //모든 인증 Manager
-		// 	auth.userDetailsService(userservice).passwordEncoder(passwordEncoder());
-		// 	auth.eraseCredentials(false);
-		// 	//auth.inMemoryAuthentication().withUser("zzang22yn").password("1125").roles("ROLE_ADMIN"); 
+		private UserService userservice;
+	
 
-		// }
+		@Autowired //생성자나 세터 등을 사용하여 의존성 주입을 하려고 할 때, 해당 빈을 찾아서 주입해주는 annotation
+		public void configure(AuthenticationManagerBuilder auth) throws Exception { //모든 인증 Manager
+			auth.userDetailsService(userservice).passwordEncoder(passwordEncoder());
+			auth.eraseCredentials(false);
+			//auth.inMemoryAuthentication().withUser("zzang22yn").password("1125").roles("ROLE_ADMIN"); 
+
+		}
 		@Bean // 비밀번호 암호화 객체
 		public PasswordEncoder passwordEncoder(){
 			return new BCryptPasswordEncoder();

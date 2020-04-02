@@ -22,7 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 	
 	
 	
-
+	// @Autowired
+	// AuthProvider authProvider;
 	
 	// @Bean // userservice 객체 동작은 하나 return null
 	// public UserService userservice(){
@@ -52,9 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 			http.logout() //로그아웃 설정
 				.permitAll() //update 예정
 				//로그인 프로세스가 진행될 provider
-				.and()
+				.and();
 				//.httpBasic()//사용자는 HTTP기반 인증으로 인증 할 수 있습니다.
-				.authenticationProvider(authProvider);
+				//.authenticationProvider(authProvider);
 				
 
 			// System.out.println("++++++//////"+http.formLogin());
@@ -64,8 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 		// @Autowired
 		// private UserService userservice;
 	
-		@Autowired
-		AuthProvider authProvider;
+
 		// @Autowired //생성자나 세터 등을 사용하여 의존성 주입을 하려고 할 때, 해당 빈을 찾아서 주입해주는 annotation
 		// public void configure(AuthenticationManagerBuilder auth) throws Exception { //모든 인증 Manager
 		// 	auth.userDetailsService(userservice).passwordEncoder(passwordEncoder());
@@ -73,10 +73,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 		// 	//auth.inMemoryAuthentication().withUser("zzang22yn").password("1125").roles("ROLE_ADMIN"); 
 
 		// }
-		@Bean // 비밀번호 암호화 객체
-		public PasswordEncoder passwordEncoder(){
-			return new BCryptPasswordEncoder();
-		}
+		// @Bean // 비밀번호 암호화 객체
+		// public PasswordEncoder passwordEncoder(){
+		// 	return new BCryptPasswordEncoder();
+		// }
 	
 
 	//회원가입시 필요 

@@ -22,8 +22,6 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
-
-
 	public User getUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
@@ -67,7 +65,7 @@ public class UserService implements UserDetailsService {
 		//ArrayList<User> users = (ArrayList<User>) userRepository.findByUsername_(username);
 
         if (user==null) {
-			System.out.println("사용자정보 없음");
+			System.out.println("&&&&&&&&&&" + user +"&&&&&&&&&&&&&");
 
             throw new UsernameNotFoundException(username + "is not found.");
         }

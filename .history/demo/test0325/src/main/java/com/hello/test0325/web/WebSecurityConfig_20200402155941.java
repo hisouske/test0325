@@ -73,10 +73,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter /** WebSecur
 		// 	//auth.inMemoryAuthentication().withUser("zzang22yn").password("1125").roles("ROLE_ADMIN"); 
 
 		// }
-		@Bean // 비밀번호 암호화 객체
-		public PasswordEncoder passwordEncoder(){
-			return new BCryptPasswordEncoder();
-		}
+		// @Bean // 비밀번호 암호화 객체
+		// public PasswordEncoder passwordEncoder(){
+		// 	return new BCryptPasswordEncoder();
+		// }
 	
 
 	//회원가입시 필요 

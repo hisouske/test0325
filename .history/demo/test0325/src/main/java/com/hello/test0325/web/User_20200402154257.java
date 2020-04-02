@@ -40,7 +40,7 @@ public class User implements UserDetails{
     public User() {
         
     }
-    
+
     @Builder
     public User(String username,
     String password,String authority){
@@ -59,7 +59,7 @@ public class User implements UserDetails{
 
     @Override
     public boolean isAccountNonLocked(){
-        System.out.println(">>>> isAccountNonLocked <<<<");
+        System.out.println(">"+this);
         return true;
     }
 
@@ -68,24 +68,24 @@ public class User implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority(this.getAuthority()));
-        System.out.println(">>>> getAuthorities <<<<"+ authorities);
+        System.out.println(">"+this);
     return authorities;
     }
     
 
 	@Override
 	public boolean isAccountNonExpired() {
-        System.out.println(">>>> isAccountNonExpired <<<<");
+        System.out.println(">"+this);
 		return true;
 	}
 	@Override
 	public boolean isCredentialsNonExpired() {
-        System.out.println(">>>> isCredentialNonExpired <<<<");
+        System.out.println(">"+this);
 		return true;
 	}
 	@Override
 	public boolean isEnabled() {
-        System.out.println(">>>> isEnable <<<<");
+        System.out.println(">"+this);
 		return true;
 	}
 
