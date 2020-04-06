@@ -38,12 +38,12 @@ public class LoginController {
 	// }
 
 	@PostMapping("joinok")
-	public String join(HttpServletRequest request,Model model) {
+	public String join(HttpServletRequest request) {
 		// MemberRole role = new MemberRole();
-		model.addAttribute("login_message", "가입완료 ! 로그인해주세요");
+
 		String username = request.getParameter("uid");
 		String userpw = request.getParameter("upw");
-System.out.println(username);
+System.out.println(uid);
 		// User user ;
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String password = passwordEncoder.encode(userpw);

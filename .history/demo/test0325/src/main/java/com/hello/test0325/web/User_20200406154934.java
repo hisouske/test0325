@@ -15,19 +15,19 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Data
+
 @Table(name="\"user\"")
 public class User implements UserDetails{
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private String username;
     private String password;
     private String Authority;

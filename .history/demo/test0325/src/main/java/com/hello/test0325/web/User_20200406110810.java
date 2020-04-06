@@ -15,19 +15,20 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Data
-@Table(name="\"user\"")
+@Table(name="\"200227member\"")
 public class User implements UserDetails{
+
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
     private String username;
     private String password;
     private String Authority;
@@ -40,17 +41,14 @@ public class User implements UserDetails{
     @Builder
     public User(String username,
     String password,String authority){
-        // this.id = id;
         this.username = username;
         this.password = password;
         this.Authority = authority;
-
-        System.out.println("builder"+this);
     }
 
     @Override
     public String toString(){
-        return String.format("User[username="+username+",password="+password+",authority="+Authority+"]");
+        return String.format("User[id="+id+",username="+username+",password="+password+",authority="+Authority+"]");
     }
 
     @Override
@@ -68,7 +66,6 @@ public class User implements UserDetails{
     return authorities;
     }
     
-
 	@Override
 	public boolean isAccountNonExpired() {
         System.out.println(">>>> isAccountNonExpired <<<<");

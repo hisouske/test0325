@@ -44,7 +44,7 @@ public class UserService implements UserDetailsService {
 //회원가입
 	public void saveUsername(User user){
 
-	System.out.println(user);
+		System.out.println(user);
 	userRepository.save(user);
 }
 

@@ -15,19 +15,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Data
 @Table(name="\"user\"")
 public class User implements UserDetails{
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private String username;
     private String password;
     private String Authority;
@@ -44,13 +43,11 @@ public class User implements UserDetails{
         this.username = username;
         this.password = password;
         this.Authority = authority;
-
-        System.out.println("builder"+this);
     }
 
     @Override
     public String toString(){
-        return String.format("User[username="+username+",password="+password+",authority="+Authority+"]");
+        return String.format("User[id="+id+",username="+username+",password="+password+",authority="+Authority+"]");
     }
 
     @Override
