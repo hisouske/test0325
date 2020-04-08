@@ -4,8 +4,7 @@ package com.hello.test0325.web;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hello.test0325.dao.UserService;
-import com.hello.test0325.dbtable.T200227member;
+import com.hello.test0325.dbtable.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -48,7 +47,7 @@ public class AuthProvider implements AuthenticationProvider{
         String username = (String) authentication.getPrincipal();
         String webpassword= (String)authentication.getCredentials();
     
-        T200227member user = userService.login(username,webpassword);
+        User user = userService.login(username,webpassword);
         System.out.println(user);
 
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<GrantedAuthority>();

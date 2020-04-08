@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<form class="signup-form" action="/marketjoinok" method="POST">
+   <!----> <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+   <div class="row">
+    <div class="input-field col s12">
+      <input id="market_name" name="mid" type="text" class="validate"/>
+      <label for="market_name">Market Name</label>
+    </div>
+  </div>
+
+   <div class="row">
+      <div class="input-field col s12">
+        <input id="user_name" name="uid" type="text" class="validate"/>
+        <label for="user_name">Username</label>
+
+        <select name="fruit" size="1">
+            <option value="" selected></option>
+            <option value="선착"> 사과 </option>
+            <option value="후착"> 바나나</option>
+       </select>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="market_pic" name="mpic" type="text" class="validate"/>
+        <label for="market_pic">마켓 사진 영역</label>
+      </div>
+       
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="market_intro" name="mintro" type="text" class="validate"/>
+          <label for="market_intro">마켓 소개 영역</label>
+        </div>
+    </div>
+    <input class="signup-btn waves-effect waves-light btn" type="submit" value="가입하기" />
+  </form></html>

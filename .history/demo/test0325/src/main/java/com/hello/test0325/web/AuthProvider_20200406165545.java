@@ -4,9 +4,6 @@ package com.hello.test0325.web;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hello.test0325.dao.UserService;
-import com.hello.test0325.dbtable.T200227member;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -22,7 +19,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
  
-
 /**
  * 인증 프로바이더
  * 로그인시 사용자가 입력한 아이디와 비밀번호를 확인하고 해당 권한을 주는 클래스
@@ -45,17 +41,16 @@ public class AuthProvider implements AuthenticationProvider{
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String username = (String) authentication.getPrincipal();
+        String memid = (String) authentication.getPrincipal();
         String webpassword= (String)authentication.getCredentials();
     
-        T200227member user = userService.login(username,webpassword);
-        System.out.println(user);
+        User user = userService.login(memid,webpassword);
 
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<GrantedAuthority>();
         grantedAuthorityList.add(new SimpleGrantedAuthority(user.getAuthority()));
 
-        System.out.println(new UsernamePasswordAuthenticationToken(username, webpassword,grantedAuthorityList));
-  return new UsernamePasswordAuthenticationToken(username, webpassword,grantedAuthorityList);
+        System.out.println(new UsernamePasswordAuthenticationToken(memid, webpassword,grantedAuthorityList));
+  return new UsernamePasswordAuthenticationToken(memid, webpassword,grantedAuthorityList);
 }
 
 @Override
