@@ -1,7 +1,6 @@
 package com.hello.test0325.dbtable;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,22 +21,21 @@ public class T200227market{
     private String marketname;
     private String marketpic;
     private String markettext;
-    
-    @ManyToOne(targetEntity = T200227member.class, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "memid", insertable = false, updatable = false)
     private T200227member t200227member;
+
     public T200227market(){   
     }
 
     @Builder
-    public T200227market(int marketcode,String memid,String marketname, String marketpic,String markettext,T200227member t200227member){
+    public T200227market(int marketcode,String memid,String marketname, String marketpic,String markettext){
         // this.id = id;
         this.marketcode = marketcode;
         this.memid = memid;
         this.marketname = marketname;
         this.marketpic = marketpic;         
         this.markettext = markettext;
-        this.t200227member = t200227member;
 
         System.out.println("builder >>>"+this);
     }

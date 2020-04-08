@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <form class="signup-form" action="/marketjoinok" method="POST">
-    <h1 class="h3 mb-3 font-weight-normal">[[${#httpServletRequest.remoteUser}]][[${marketjoin_message}]] 
+    <h1 class="h3 mb-3 font-weight-normal">[[${marketjoin_message}]] [[${#httpServletRequest.remoteUser}]]
     </h1>
    <!----> <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
    <div class="row">
@@ -30,5 +30,5 @@
           <label for="market_intro">마켓 소개</label>
         </div>
     </div>
-    <input class="signup-btn waves-effect waves-light btn" type="submit" value="마켓만들기" />
+    <input class="signup-btn waves-effect waves-light btn" type="submit" value="가입하기" />
   </form></html>

@@ -30,14 +30,13 @@ public class T200227market{
     }
 
     @Builder
-    public T200227market(int marketcode,String memid,String marketname, String marketpic,String markettext,T200227member t200227member){
+    public T200227market(int marketcode,String memid,String marketname, String marketpic,String markettext){
         // this.id = id;
         this.marketcode = marketcode;
         this.memid = memid;
         this.marketname = marketname;
         this.marketpic = marketpic;         
         this.markettext = markettext;
-        this.t200227member = t200227member;
 
         System.out.println("builder >>>"+this);
     }

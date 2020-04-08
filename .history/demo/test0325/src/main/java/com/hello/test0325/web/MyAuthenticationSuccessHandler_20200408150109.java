@@ -27,10 +27,11 @@ HttpServletResponse response, Authentication auth)throws IOException, ServletExc
     List<GrantedAuthority> authorities =  (List<GrantedAuthority>) auth.getAuthorities();
     String memid = (String) auth.getPrincipal();
     String strAuth = authorities.get(0).getAuthority();
+
     Cookie cookie = new Cookie("auth", strAuth);
     response.addCookie(cookie);
     cookie = new Cookie("memid", memid);
-    response.addCookie(cookie);
+
 
 
     // response.setStatus(HttpServletResponse.SC_OK);
