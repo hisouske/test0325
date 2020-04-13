@@ -50,6 +50,9 @@ public class T200227member implements UserDetails{
     private T200227public t200227public;
    
     @OneToMany
+    @JoinTable(name = "member_market",
+      joinColumns = @JoinColumn(name = "memid"),
+      inverseJoinColumns = @JoinColumn(name = "memid"))
     private List<T200227market> t200227markets = new ArrayList<>();
 
     // JPA 에 사용되는 instence

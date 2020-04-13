@@ -42,8 +42,8 @@ public class T200227market{
     
   @ManyToOne(optional = false)
   @JoinTable(name = "PARENT_CHILD",
-    joinColumns = @JoinColumn(name = "memid",insertable = false, updatable = false),
-    inverseJoinColumns = @JoinColumn(name = "memid",insertable = false, updatable = false))
+    joinColumns = @JoinColumn(name = "memid"),
+    inverseJoinColumns = @JoinColumn(name = "memid"))
   private T200227member t200227member;
 
     // @ManyToOne(targetEntity = T200227member.class, fetch =FetchType.LAZY)

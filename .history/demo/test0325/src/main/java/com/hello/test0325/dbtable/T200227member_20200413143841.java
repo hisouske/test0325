@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -48,9 +47,9 @@ public class T200227member implements UserDetails{
     @ManyToOne
     @JoinColumn(name = "publiccode", insertable = false, updatable = false)
     private T200227public t200227public;
-   
-    @OneToMany
-    private List<T200227market> t200227markets = new ArrayList<>();
+
+    @OneToMany(mappedBy="t200227member")  // Employee 엔티티를 연관관계 주인으로 지정
+    private List<T200227market> t200227markets = new ArrayList<T200227market>();
 
     // JPA 에 사용되는 instence
     public T200227member() {

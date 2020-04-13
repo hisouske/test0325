@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.JoinColumnOrFormula;
@@ -40,15 +39,10 @@ public class T200227market{
     @Column
     private String markettext;
     
-  @ManyToOne(optional = false)
-  @JoinTable(name = "PARENT_CHILD",
-    joinColumns = @JoinColumn(name = "memid",insertable = false, updatable = false),
-    inverseJoinColumns = @JoinColumn(name = "memid",insertable = false, updatable = false))
-  private T200227member t200227member;
-
-    // @ManyToOne(targetEntity = T200227member.class, fetch =FetchType.LAZY)
-    // @JoinColumn(name = "memid", insertable = false, updatable = false)
-    // private T200227member t200227member;
+  
+    @OneToMany
+    @JoinColumn(name = "memid", insertable = false, updatable = false)
+    private T200227member t200227member;
 
 
     public T200227market(){   
