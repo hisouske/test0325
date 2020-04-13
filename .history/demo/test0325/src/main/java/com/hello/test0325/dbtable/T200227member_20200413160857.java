@@ -45,7 +45,6 @@ public class T200227member implements UserDetails{
     private String emailadd;
     @Column
     private String Authority;
-    
     @ManyToOne
     @JoinColumn(name = "publiccode", insertable = false, updatable = false)
     private T200227public t200227public;
@@ -60,7 +59,7 @@ public class T200227member implements UserDetails{
 
 
     @Builder
-    public T200227member(String username,String password,int publiccode,String memcourse, String emailadd,String authority){
+    public T200227member(String username,String password,int publiccode,String memcourse, String emailadd,String authority,List<T200227market> children){
         // this.id = id;
         this.username = username;
         this.password = password;
@@ -68,6 +67,7 @@ public class T200227member implements UserDetails{
         this.memcourse = memcourse;
         this.emailadd = emailadd;
         this.Authority = authority;
+        this.t200227markets.addAll(children);
 
         System.out.println("builder >>1>"+this);
     }

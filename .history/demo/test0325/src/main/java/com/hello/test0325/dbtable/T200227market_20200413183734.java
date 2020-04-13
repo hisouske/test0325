@@ -36,10 +36,8 @@ public class T200227market{
     @Column
     private String markettext;
     
-  @ManyToOne(cascade = CascadeType.ALL,optional = true, fetch = FetchType.LAZY)
-  @JoinTable(name = "PARENT_CHILD",
-    joinColumns = @JoinColumn(name = "marketcode",insertable = false, updatable = false),
-    inverseJoinColumns = @JoinColumn(name = "memid",insertable = false, updatable = false))
+  @ManyToOne
+  @JoinColumn(name = "memid")
   private T200227member join200227member;
 
     // @ManyToOne(targetEntity = T200227member.class, fetch =FetchType.LAZY)

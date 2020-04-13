@@ -89,7 +89,7 @@ public class MainController {
 
 @PostMapping("marketjoinok")
 	public String marketjoin(HttpServletRequest request,Model model) {
-		T200227member member =null;
+		T200227member member ;
 		model.addAttribute("login_message", "가입완료 ! 로그인해주세요");
 		Cookie[] getCookie = ((HttpServletRequest) request).getCookies();
 		if(getCookie != null){
@@ -107,7 +107,7 @@ public class MainController {
 	  
 		T200227market t200227market = T200227market.builder()
 			// .memid("zzang22yn")
-			.marketcode(0)
+			// .marketcode(marketcode)
 			.marketname("hi_market")
 			.marketpic("picaddr")
 			.markettext("picintro")

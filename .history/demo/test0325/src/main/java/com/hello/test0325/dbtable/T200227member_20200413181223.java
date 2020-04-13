@@ -51,6 +51,7 @@ public class T200227member implements UserDetails{
     private T200227public t200227public;
    
     @OneToMany(mappedBy = "join200227member")
+    @JoinTable(name = "PARENT_CHILD")
     private List<T200227market> t200227markets = new ArrayList<>();
 
     // JPA 에 사용되는 instence

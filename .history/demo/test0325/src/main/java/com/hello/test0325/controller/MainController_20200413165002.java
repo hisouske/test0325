@@ -107,7 +107,7 @@ public class MainController {
 	  
 		T200227market t200227market = T200227market.builder()
 			// .memid("zzang22yn")
-			.marketcode(0)
+			// .marketcode(marketcode)
 			.marketname("hi_market")
 			.marketpic("picaddr")
 			.markettext("picintro")

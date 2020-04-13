@@ -45,7 +45,6 @@ public class T200227member implements UserDetails{
     private String emailadd;
     @Column
     private String Authority;
-    
     @ManyToOne
     @JoinColumn(name = "publiccode", insertable = false, updatable = false)
     private T200227public t200227public;

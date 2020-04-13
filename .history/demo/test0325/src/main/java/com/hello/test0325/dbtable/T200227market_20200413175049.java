@@ -1,11 +1,10 @@
 package com.hello.test0325.dbtable;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -24,11 +23,11 @@ import lombok.Setter;
 @Table(name="\"200227market\"")
 public class T200227market{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column
     private int marketcode;
-    @Column(name = "memid")
-    private String username;
+    @Column
+    private String memid;
     @Column
     private String marketname;
     @Column
@@ -36,7 +35,7 @@ public class T200227market{
     @Column
     private String markettext;
     
-  @ManyToOne(cascade = CascadeType.ALL,optional = true, fetch = FetchType.LAZY)
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinTable(name = "PARENT_CHILD",
     joinColumns = @JoinColumn(name = "marketcode",insertable = false, updatable = false),
     inverseJoinColumns = @JoinColumn(name = "memid",insertable = false, updatable = false))

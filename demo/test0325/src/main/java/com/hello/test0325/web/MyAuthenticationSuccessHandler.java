@@ -31,6 +31,7 @@ HttpServletResponse response, Authentication auth)throws IOException, ServletExc
     response.addCookie(cookie);
     cookie = new Cookie("memid", memid);
     response.addCookie(cookie);
+    
 
 
     // response.setStatus(HttpServletResponse.SC_OK);

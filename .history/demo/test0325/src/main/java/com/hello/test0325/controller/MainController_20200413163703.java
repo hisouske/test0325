@@ -89,29 +89,26 @@ public class MainController {
 
 @PostMapping("marketjoinok")
 	public String marketjoin(HttpServletRequest request,Model model) {
-		T200227member member =null;
 		model.addAttribute("login_message", "가입완료 ! 로그인해주세요");
 		Cookie[] getCookie = ((HttpServletRequest) request).getCookies();
 		if(getCookie != null){
 		for(int i=0; i<getCookie.length; i++){
 		Cookie c = getCookie[i];
 		if(c.getName().equals("memid")){// 쿠키 이름 가져오기
-		String cookieid = c.getValue();
-		member = userService.select(cookieid);
+		String value = c.getValue();
 	
 	} // 쿠키 값 가져오기
 	
 		}
 		}
 
-	  
-		T200227market t200227market = T200227market.builder()
+	    T200227market t200227market = T200227market.builder()
 			// .memid("zzang22yn")
-			.marketcode(0)
+			// .marketcode(marketcode)
 			.marketname("hi_market")
 			.marketpic("picaddr")
 			.markettext("picintro")
-			.member(member)
+		//	.member(member)
 			.build();
 			userService.saveMarket(t200227market);
 			

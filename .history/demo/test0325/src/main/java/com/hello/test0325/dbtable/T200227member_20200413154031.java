@@ -45,12 +45,11 @@ public class T200227member implements UserDetails{
     private String emailadd;
     @Column
     private String Authority;
-    
     @ManyToOne
     @JoinColumn(name = "publiccode", insertable = false, updatable = false)
     private T200227public t200227public;
    
-    @OneToMany(mappedBy = "join200227member")
+    @OneToMany(mappedBy = "t200227member")
     private List<T200227market> t200227markets = new ArrayList<>();
 
     // JPA 에 사용되는 instence
