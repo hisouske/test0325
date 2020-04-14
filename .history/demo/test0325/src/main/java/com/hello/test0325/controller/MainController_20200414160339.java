@@ -109,13 +109,15 @@ public class MainController {
 		String marketpic = request.getParameter("mpic");
 		String marketintro = request.getParameter("mintro");
 	  
-		System.out.println(marketname+marketpic+marketintro);
 
+
+		System.out.println(marketname+marketpic+marketintro);
 		T200227market t200227market = T200227market.builder()
+			// .memid("zzang22yn")
 			.marketcode(0)
-			.marketname(marketname)
-			.marketpic(marketpic)
-			.markettext(marketintro)
+			.marketname("hi_market")
+			.marketpic("picaddr")
+			.markettext("picintro")
 			.member(member)
 			.build();
 			userService.saveMarket(t200227market);

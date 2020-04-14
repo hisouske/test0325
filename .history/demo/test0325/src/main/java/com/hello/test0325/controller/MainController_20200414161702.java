@@ -109,6 +109,8 @@ public class MainController {
 		String marketpic = request.getParameter("mpic");
 		String marketintro = request.getParameter("mintro");
 	  
+
+
 		System.out.println(marketname+marketpic+marketintro);
 
 		T200227market t200227market = T200227market.builder()

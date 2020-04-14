@@ -1,8 +1,5 @@
 package com.hello.test0325.dbtable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Builder;
@@ -29,7 +25,7 @@ import lombok.Setter;
 public class T200227market{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false, insertable = false)
+    @Column
     private int marketcode;
     @Column(name = "memid", updatable = false, insertable = false)
     private String username;
@@ -41,12 +37,8 @@ public class T200227market{
     private String markettext;
     
   @ManyToOne(cascade = CascadeType.ALL,optional = true, fetch = FetchType.LAZY)
-  @JoinColumn(name ="memid")
+  @JoinColumn(name ="mem_id")
   private T200227member join200227member;
-
-
-  @OneToMany(mappedBy="join200227market")
-  private List<T200227item> t200227items = new ArrayList<>();
 
     // @ManyToOne(targetEntity = T200227member.class, fetch =FetchType.LAZY)
     // @JoinColumn(name = "memid", insertable = false, updatable = false)

@@ -52,7 +52,7 @@ public class T200227member implements UserDetails{
    
 
 
-    @OneToMany(mappedBy="join200227member")
+    @OneToMany(mappedBy="category")
     private List<T200227market> t200227markets = new ArrayList<>();
     // @OneToMany
     // @JoinTable(name = "PARENT_CHILD",

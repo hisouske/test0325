@@ -50,14 +50,11 @@ public class T200227member implements UserDetails{
     @JoinColumn(name = "publiccode", insertable = false, updatable = false)
     private T200227public t200227public;
    
-
-
-    @OneToMany(mappedBy="join200227member")
+    @OneToMany
+    @JoinTable(name = "PARENT_CHILD",
+    joinColumns = @JoinColumn(name = "memid",insertable = false, updatable = false),
+    inverseJoinColumns = @JoinColumn(name = "marketcode",insertable = false, updatable = false))
     private List<T200227market> t200227markets = new ArrayList<>();
-    // @OneToMany
-    // @JoinTable(name = "PARENT_CHILD",
-    // joinColumns = @JoinColumn(name = "memid",insertable = false, updatable = false),
-    // inverseJoinColumns = @JoinColumn(name = "marketcode",insertable = false, updatable = false))
 
     // JPA 에 사용되는 instence
     public T200227member() {

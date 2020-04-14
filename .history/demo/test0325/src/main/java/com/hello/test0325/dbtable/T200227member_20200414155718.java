@@ -52,12 +52,12 @@ public class T200227member implements UserDetails{
    
 
 
-    @OneToMany(mappedBy="join200227member")
-    private List<T200227market> t200227markets = new ArrayList<>();
+    @OneToMany(mappedBy="category")
     // @OneToMany
     // @JoinTable(name = "PARENT_CHILD",
     // joinColumns = @JoinColumn(name = "memid",insertable = false, updatable = false),
     // inverseJoinColumns = @JoinColumn(name = "marketcode",insertable = false, updatable = false))
+     private List<T200227market> t200227markets = new ArrayList<>();
 
     // JPA 에 사용되는 instence
     public T200227member() {
