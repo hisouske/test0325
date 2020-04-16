@@ -32,6 +32,10 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
+//entitymanager
+	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.2.Final'
+
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {

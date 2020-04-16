@@ -1,5 +1,6 @@
 package com.hello.test0325.dao;
 
+import com.hello.test0325.dbtable.T200227item;
 import com.hello.test0325.dbtable.T200227market;
 import com.hello.test0325.dbtable.T200227member;
 
@@ -15,6 +16,7 @@ public interface UserRepository extends CrudRepository<T200227member,Long>{
   // List<User> findByPassword(String password);
   T200227member save(T200227member user);
   T200227market save(T200227market market);
+  T200227item save(T200227item item);
 
 
 }

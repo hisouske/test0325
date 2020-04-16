@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -45,7 +44,7 @@ public class T200227market{
   private T200227member join200227member;
 
 
-  @OneToMany(mappedBy="join200227market")
+  @OneToMany(mappedBy="join200227market") //연관관계에있어서 주인이 아님 수정삭제 등 갱신 불가
   private List<T200227item> t200227items = new ArrayList<>();
 
     // @ManyToOne(targetEntity = T200227member.class, fetch =FetchType.LAZY)

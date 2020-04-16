@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -45,6 +44,7 @@ public class T200227member implements UserDetails{
     private String emailadd;
     @Column
     private String Authority;
+    
     
     @ManyToOne
     @JoinColumn(name = "publiccode", insertable = false, updatable = false)

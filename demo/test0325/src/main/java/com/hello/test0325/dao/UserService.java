@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hello.test0325.dbtable.T200227item;
 import com.hello.test0325.dbtable.T200227market;
 import com.hello.test0325.dbtable.T200227member;
 
@@ -47,7 +48,11 @@ public class UserService implements UserDetailsService {
 	System.out.println(market);
 	userRepository.save(market);
 }
-
+//상품등록
+public void saveitem(T200227item item){
+	System.out.println(item);
+	userRepository.save(item);
+}
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserDetails user = userRepository.findByUsername_(username);

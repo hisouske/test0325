@@ -5,11 +5,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import com.hello.test0325.dao.UserRepository;
 import com.hello.test0325.dao.UserService;
+import com.hello.test0325.dbtable.T200227item;
 import com.hello.test0325.dbtable.T200227market;
 import com.hello.test0325.dbtable.T200227member;
 
@@ -26,6 +31,18 @@ public class MainController {
 
 	@Autowired
 	UserService userService;
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("T200227member");
+	EntityManager em = emf.createEntityManager();
+	EntityTransaction tx = em.getTransaction();
+
+
+	@GetMapping("itemadd")
+	public String addformview(Model model,HttpServletRequest request) {
+
+		model.addAttribute("marketjoin_message", "controller item message");
+		return "itemadd";
+	}
+
 
 	@GetMapping("marketjoin")
 	public String viewmem(Model model,HttpServletRequest request) {
@@ -61,13 +78,13 @@ public class MainController {
 	// }
 
 	@PostMapping("joinok")
-	public String join(HttpServletRequest request,Model model) {
-		// MemberRole role = new MemberRole();
+	public String join(HttpServletRequest request,Model model,EntityManager em) {
+	
 		model.addAttribute("login_message", "가입완료 ! 로그인해주세요");
 		String username = request.getParameter("uid");
 		String userpw = request.getParameter("upw");
 		System.out.println(username);
-		// User user ;
+	
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String password = passwordEncoder.encode(userpw);
 
@@ -80,37 +97,36 @@ public class MainController {
 				.authority("ROLE_USER")
 				.build();
 				userService.saveUsername(t200227member);
-			
+				em.persist(t200227member);
 
 	System.out.println("------------");
-	//userrepository.save(user);
 	return "login";
 }
 
 @PostMapping("marketjoinok")
-	public String marketjoin(HttpServletRequest request,Model model) {
+	public String marketjoin(HttpServletRequest request,Model model,EntityManager em) {
 		T200227member member =null;
+		//쿠키에 저장된 id로 재 조회
 		model.addAttribute("login_message", "가입완료 ! 로그인해주세요");
 		Cookie[] getCookie = ((HttpServletRequest) request).getCookies();
 		if(getCookie != null){
 		for(int i=0; i<getCookie.length; i++){
 		Cookie c = getCookie[i];
-		if(c.getName().equals("memid")){// 쿠키 이름 가져오기
+		if(c.getName().equals("memid")){
 		String cookieid = c.getValue();
-		member = userService.select(cookieid);
-	} // 쿠키 값 가져오기
-	
+		//entityManager에 저장된 member 사용
+	//å	member = em.find(T200227member.class,cookieid);
+		System.out.println("5>>"+member);
+	//	member = userService.select(cookieid);
+	} 
 		}
 		}
-
-
 
 		String marketname = request.getParameter("mid");
 		String marketpic = request.getParameter("mpic");
 		String marketintro = request.getParameter("mintro");
 	  
 		System.out.println(marketname+marketpic+marketintro);
-
 		T200227market t200227market = T200227market.builder()
 			.marketcode(0)
 			.marketname(marketname)
@@ -119,9 +135,27 @@ public class MainController {
 			.member(member)
 			.build();
 			userService.saveMarket(t200227market);
-			
+member.getT200227markets().add(t200227market);
+t200227market.setJoin200227member(member);
 
 	System.out.println("------------");
+	//userrepository.save(user);
+	return "login";
+}
+@PostMapping("itemaddok")
+	public String itemadd(HttpServletRequest request,Model model) {
+		
+
+		// String iid = request.getParameter("iid");
+		// System.out.println(iid);
+		// T200227item t200227item = T200227item.builder()
+		// .unioncode(0)
+		// .price(0)
+		// .itemname("aaa")
+		// .itempic("itempic")
+		// .itemtext("itemtext")
+		// .market(market)
+		// .build();
 	//userrepository.save(user);
 	return "login";
 }
