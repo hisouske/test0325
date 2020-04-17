@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,15 +26,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequestMapping(value = "/", method = RequestMethod.POST)
-public class MainController {
+public class MainController{
+	
 	@Autowired
 	UserRepository userrepository;
 
 	@Autowired
 	UserService userService;
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("T200227member");
-	EntityManager em = emf.createEntityManager();
-	EntityTransaction tx = em.getTransaction();
+	
+	//static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
+    // EntityManagerFactory emf = Persistence.createEntityManagerFactory("----");
+	@PersistenceContext
+	private EntityManager em;
+
+	//EntityManager em = emf.createEntityManager();
+	//EntityTransaction tx = em.getTransaction();
 
 
 	@GetMapping("itemadd")
@@ -98,6 +105,7 @@ public class MainController {
 				.build();
 				userService.saveUsername(t200227member);
 				em.persist(t200227member);
+				System.out.println(">em>"+em);
 
 	System.out.println("------------");
 	return "login";
