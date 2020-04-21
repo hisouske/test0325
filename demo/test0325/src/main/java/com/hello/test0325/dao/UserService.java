@@ -41,7 +41,8 @@ public class UserService implements UserDetailsService {
 //회원가입
 	public void saveUsername(T200227member user){
 	System.out.println(user);
-	userRepository.save(user);
+T200227member a = userRepository.save(user);
+System.out.println(a);
 }
 //마켓가입
 	public void saveMarket(T200227market market){

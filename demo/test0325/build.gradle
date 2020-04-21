@@ -33,7 +33,7 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
 //entitymanager
-	compile group: 'org.hibernate', name: 'hibernate-entitymanager'
+//	compile group: 'org.hibernate', name: 'hibernate-entitymanager'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

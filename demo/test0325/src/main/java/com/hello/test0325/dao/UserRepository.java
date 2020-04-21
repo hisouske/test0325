@@ -14,7 +14,12 @@ public interface UserRepository extends CrudRepository<T200227member,Long>{
    T200227member findByUsername(String username);
    UserDetails findByUsername_(String username);
   // List<User> findByPassword(String password);
+  
   T200227member save(T200227member user);
+
+// @Query("insert into 200227member values(")
+// void memsave(T200227member user);
+
   T200227market save(T200227market market);
   T200227item save(T200227item item);
 

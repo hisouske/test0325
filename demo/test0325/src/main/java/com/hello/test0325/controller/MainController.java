@@ -1,6 +1,7 @@
 package com.hello.test0325.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-
+@Repository
 @Controller
 @RequestMapping(value = "/", method = RequestMethod.POST)
 public class MainController{
@@ -34,13 +36,17 @@ public class MainController{
 	@Autowired
 	UserService userService;
 	
+	 @PersistenceUnit
+	 private EntityManagerFactory emf= Persistence.createEntityManagerFactory("jpabook");
+	 @PersistenceContext
+	 private EntityManager em;
+
+
 	//static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
     // EntityManagerFactory emf = Persistence.createEntityManagerFactory("----");
-	@PersistenceContext
-	private EntityManager em;
 
-	//EntityManager em = emf.createEntityManager();
-	//EntityTransaction tx = em.getTransaction();
+	// EntityManager em = emf.createEntityManager();
+	// EntityTransaction tx = em.getTransaction();
 
 
 	@GetMapping("itemadd")
@@ -85,13 +91,12 @@ public class MainController{
 	// }
 
 	@PostMapping("joinok")
-	public String join(HttpServletRequest request,Model model,EntityManager em) {
+	public String join(HttpServletRequest request,Model model) {
 	
 		model.addAttribute("login_message", "가입완료 ! 로그인해주세요");
 		String username = request.getParameter("uid");
 		String userpw = request.getParameter("upw");
-		System.out.println(username);
-	
+	System.out.println("joinok >>"+username);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String password = passwordEncoder.encode(userpw);
 
@@ -103,6 +108,7 @@ public class MainController{
 				.emailadd("Y")
 				.authority("ROLE_USER")
 				.build();
+				System.out.println(t200227member);
 				userService.saveUsername(t200227member);
 				em.persist(t200227member);
 				System.out.println(">em>"+em);
@@ -123,9 +129,9 @@ public class MainController{
 		if(c.getName().equals("memid")){
 		String cookieid = c.getValue();
 		//entityManager에 저장된 member 사용
-	//å	member = em.find(T200227member.class,cookieid);
+		member = em.find(T200227member.class,cookieid);
 		System.out.println("5>>"+member);
-	//	member = userService.select(cookieid);
+		member = userService.select(cookieid);
 	} 
 		}
 		}
