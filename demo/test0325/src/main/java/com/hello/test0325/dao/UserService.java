@@ -7,13 +7,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import com.hello.test0325.dbtable.T200227item;
 import com.hello.test0325.dbtable.T200227market;
 import com.hello.test0325.dbtable.T200227member;
 
 
-
-@Service
+  @Service
 public class UserService implements UserDetailsService {
 
 	@Autowired
@@ -54,6 +57,17 @@ public void saveitem(T200227item item){
 	System.out.println(item);
 	userRepository.save(item);
 }
+
+//id 기준으로 마켓 찾기 
+public List<Object> findMyMarket(String username){
+
+	List<Object> mymarket = userRepository.findMarketByUsername(username);
+	return mymarket;
+}
+
+
+
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserDetails user = userRepository.findByUsername_(username);

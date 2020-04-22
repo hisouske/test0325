@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -14,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import com.hello.test0325.dao.UserRepository;
 import com.hello.test0325.dao.UserService;
@@ -27,6 +30,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 @Repository
 @Controller
+@Transactional
 @RequestMapping(value = "/", method = RequestMethod.POST)
 public class MainController{
 	
@@ -59,17 +63,18 @@ public class MainController{
 
 	@GetMapping("marketjoin")
 	public String viewmem(Model model,HttpServletRequest request) {
-		Cookie[] getCookie =  request.getCookies();
-
-		if(getCookie != null){
 		
+		Cookie[] getCookie = ((HttpServletRequest) request).getCookies();
+		if(getCookie != null){
 		for(int i=0; i<getCookie.length; i++){
 		Cookie c = getCookie[i];
-		String name = c.getName(); // 쿠키 이름 가져오기
-		String value = c.getValue(); // 쿠키 값 가져오기
-		System.out.println(name+value);
-		}
-		}
+		if(c.getName().equals("memid")){
+		String cookieid = c.getValue();
+		//entityManager에 저장된 member 사용
+		List<Object> mymarket = userService.findMyMarket(cookieid);
+	System.out.println("findmymarket>>"+mymarket);
+	}
+	}}
 		model.addAttribute("marketjoin_message", "controller market message");
 		return "marketjoin";
 	}
@@ -96,7 +101,7 @@ public class MainController{
 		model.addAttribute("login_message", "가입완료 ! 로그인해주세요");
 		String username = request.getParameter("uid");
 		String userpw = request.getParameter("upw");
-	System.out.println("joinok >>"+username);
+		System.out.println("joinok >>"+username);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String password = passwordEncoder.encode(userpw);
 
@@ -109,9 +114,10 @@ public class MainController{
 				.authority("ROLE_USER")
 				.build();
 				System.out.println(t200227member);
-				userService.saveUsername(t200227member);
+				//entitymanager 사용 > @Transactional 으로 메소드 종료시 자동 db추가 
 				em.persist(t200227member);
-				System.out.println(">em>"+em);
+				//userService.saveUsername(t200227member);
+		
 
 	System.out.println("------------");
 	return "login";
@@ -128,10 +134,10 @@ public class MainController{
 		Cookie c = getCookie[i];
 		if(c.getName().equals("memid")){
 		String cookieid = c.getValue();
-		//entityManager에 저장된 member 사용
-		member = em.find(T200227member.class,cookieid);
-		System.out.println("5>>"+member);
-		member = userService.select(cookieid);
+		
+		//member = em.find(T200227member.class,cookieid);
+		System.out.println("5 >>"+member);
+		if(member!=null)member = userService.select(cookieid);
 	} 
 		}
 		}
